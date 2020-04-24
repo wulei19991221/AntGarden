@@ -17,8 +17,6 @@ def get_max_page():
         max_page = re.findall(rule, last)[0]
     except (AttributeError, TypeError):
         print('请重新检查网址')
-    finally:
-        session.close()
     return max_page
 
 
@@ -39,13 +37,11 @@ def all_answers(counts):
         content += '*' * 120 + '\n'
     with open(f'蚂蚁庄园每日答案{time.strftime("%y-%m-%d")}.txt', mode='w', encoding='utf-8') as f:
         f.write(content)
-    session.close()
 
 
 def get_latest_answer():
     ps = session.get(url).html.find('.strategy-main-content p')
     print(ps[3].text)
-    session.close()
 
 
 def save_all_answer():
@@ -55,8 +51,10 @@ def save_all_answer():
 
 
 if __name__ == '__main__':
+    start = time.time()
     session = HTMLSession()
     url = 'https://www.youxi369.com/news/2254.html'
-    get_latest_answer()
-    # save_all_answer()
-
+    # get_latest_answer()
+    save_all_answer()
+    session.close()
+    print(f'{time.time() - start:.2f}')
