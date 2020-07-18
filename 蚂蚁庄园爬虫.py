@@ -9,6 +9,7 @@ import time
 import requests
 from print_color import *
 
+
 def get_max_page():
     max_page = 0
     try:
@@ -47,11 +48,11 @@ def get_latest_answer():
     current_time = ''.join(current_time)
     r = requests.get(url).text
     htm = etree.HTML(r)
-    ps = htm.xpath('.//div[@class="strategy-main-content"]/p[position()=4 or position()=5]')
+    ps = htm.xpath('.//div[@class="strategy-main-content"]/p[position()<10]')
     for p in ps:
-        todat_ans = ''.join(p.xpath('.//text()'))
-        if current_time in todat_ans:
-            print_c(fblue, todat_ans)
+        today_ans = ''.join(p.xpath('.//text()'))
+        if current_time in today_ans:
+            print_c(fblue, today_ans)
 
 
 def save_all_answer():
