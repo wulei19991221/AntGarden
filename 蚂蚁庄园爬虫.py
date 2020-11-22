@@ -52,7 +52,8 @@ def get_latest_answer():
     for p in ps:
         today_ans = ''.join(p.xpath('.//text()'))
         if current_time in today_ans:
-            print_c(fblue, today_ans)
+            print(today_ans)
+            # print_c(today_ans, fred)
 
 
 def save_all_answer():
@@ -64,6 +65,6 @@ def save_all_answer():
 if __name__ == '__main__':
     start = time.time()
     url = 'https://www.youxi369.com/news/2254.html'
-    # get_latest_answer()
+    get_latest_answer()
     # save_all_answer()
     print_c(f'耗时: {time.time() - start:.2f}秒')
